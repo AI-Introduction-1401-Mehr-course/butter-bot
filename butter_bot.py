@@ -23,10 +23,10 @@ class ButterBotStateSpace(StateSpace):
     class Action(Enum):
         value: Cell
 
-        GO_UP = (0, 1)
-        GO_LEFT = (-1, 0)
-        GO_DOWN = (0, -1)
-        GO_RIGHT = (1, 0)
+        GO_UP = (-1, 0)
+        GO_LEFT = (0, 1)
+        GO_DOWN = (1, 0)
+        GO_RIGHT = (0, -1)
 
     def _is_valid(self) -> bool:
         state = self.state
@@ -52,13 +52,11 @@ class ButterBotStateSpace(StateSpace):
         if new_bot_cell in self.state.butter_cells:
             moved_butter_cell = tuple(i + j for i, j in zip(new_bot_cell, action.value))
             butter_cell_index = self.state.butter_cells.index(new_bot_cell)
-            new_butter_cells = list(
-                self.state.butter_cells[:butter_cell_index]
-                + [
-                    moved_butter_cell,
-                ]
-                + self.state.butter_cells[butter_cell_index + 1 :]
-            )
+            new_butter_cells = [
+                *self.state.butter_cells[:butter_cell_index],
+                moved_butter_cell,
+                *self.state.butter_cells[butter_cell_index + 1 :],
+            ]
 
         return ButterBotStateSpace(
             {

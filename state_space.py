@@ -7,11 +7,6 @@ class StateSpace(ABC):
 
     Action = Type[Enum]
 
-    @property
-    @abstractmethod
-    def state(self) -> NamedTuple:
-        ...
-
     @abstractmethod
     def result(self, action: Action) -> Self:
         ...
