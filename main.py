@@ -9,7 +9,7 @@ columns, rows = (int(i) for i in next(stdin).split())
 cells = [next(stdin).split() for _ in range(columns)]
 
 cost_table: List[List[int]] = [
-    [int(sub("\D", "", cells[i][j])) if cells[i][j] != "x" else 0 for j in range(rows)]
+    [int(sub(r"\D", "", cells[i][j])) if cells[i][j] != "x" else 0 for j in range(rows)]
     for i in range(columns)
 ]
 
@@ -23,12 +23,13 @@ for i in range(columns):
         for symbol, cell_list in {
             "b": butter_cells,
             "p": target_cells,
-            "b": blocked_cells,
+            "x": blocked_cells,
         }.items():
             if cells[i][j].count(symbol):
                 cell_list.append((i, j))
         if cells[i][j].count("r"):
             bot_cell = (i, j)
+
 
 state_space = ButterBotStateSpace(
     {
@@ -41,3 +42,8 @@ state_space = ButterBotStateSpace(
         "blocked_cells": blocked_cells,
     }
 )
+
+from bfs import BFSearch
+
+bfs = BFSearch()
+print(bfs(state_space))
