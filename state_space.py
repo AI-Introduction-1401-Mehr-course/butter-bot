@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import NamedTuple, List, Type, Self
+from typing import List, Type, Self
 from enum import Enum
 
 
@@ -17,4 +17,8 @@ class StateSpace(ABC):
 
     @abstractmethod
     def cost(self, action: Action) -> int:
+        ...
+
+    @abstractmethod
+    def is_goal(self) -> bool:
         ...

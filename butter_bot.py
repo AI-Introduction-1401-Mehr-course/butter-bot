@@ -72,3 +72,9 @@ class ButterBotStateSpace(StateSpace):
     def cost(self, action: Action) -> int:
         new_bot_cell = tuple(i + j for i, j in zip(self.state.bot_cell, action.value))
         return self.state.cost_table[new_bot_cell[0]][new_bot_cell[1]]
+
+    def is_goal(self) -> bool:
+        return all(
+            target_cell in self.state.butter_cells
+            for target_cell in self.state.target_cells
+        )
