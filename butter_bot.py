@@ -24,9 +24,9 @@ class ButterBotStateSpace(StateSpace):
         value: Cell
 
         GO_UP = (-1, 0)
-        GO_LEFT = (0, 1)
+        GO_LEFT = (0, -1)
         GO_DOWN = (1, 0)
-        GO_RIGHT = (0, -1)
+        GO_RIGHT = (0, 1)
 
     def _is_valid(self) -> bool:
         state = self.state
