@@ -46,4 +46,14 @@ state_space = ButterBotStateSpace(
 from bfs import BFSearch
 
 bfs = BFSearch()
-print(bfs(state_space))
+# print(bfs(state_space))
+
+from dfs import DFSearch
+
+dfs = DFSearch()
+# print(dfs(state_space))
+
+from ids import IDSearch
+
+ids = IDSearch()
+print(ids(state_space))
