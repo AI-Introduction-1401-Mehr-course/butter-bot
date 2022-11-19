@@ -56,4 +56,9 @@ dfs = DFSearch()
 from ids import IDSearch
 
 ids = IDSearch()
-print(ids(state_space))
+# print(ids(state_space))
+
+from ucs import UCSearch
+ucs = UCSearch()
+print(ucs(state_space))
+
