@@ -60,5 +60,11 @@ ids = IDSearch()
 
 from ucs import UCSearch
 ucs = UCSearch()
-print(ucs(state_space))
+#print(ucs(state_space))
+
+from a_star import AStar
+astar = AStar()
+print(astar(state_space))
+
+
 
