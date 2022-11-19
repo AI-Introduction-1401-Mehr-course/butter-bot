@@ -64,7 +64,10 @@ ucs = UCSearch()
 
 from a_star import AStar
 astar = AStar()
-print(astar(state_space))
+# print(astar(state_space))
 
+from best_first_search import BestFirstSearch
+best_first_search = BestFirstSearch()
+print(best_first_search(state_space))
 
 
