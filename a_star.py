@@ -18,12 +18,12 @@ class AStar(Search):
             if current_node.state_space.is_goal():
                 return current_node.path
             for action in current_node.state_space.action():
-                insort(list,
+                insort(
+                    list,
                     Node(
                         current_node.state_space.result(action),
                         [*current_node.path, action],
-                        cost= current_node.cost + current_node.state_space.cost(action)
+                        cost=current_node.cost + current_node.state_space.cost(action),
                     ),
-                    key=lambda x: x.cost + x.state_space.heuristic()
+                    key=lambda x: x.cost + x.state_space.heuristic(),
                 )
-                
