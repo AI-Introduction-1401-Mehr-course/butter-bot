@@ -1,5 +1,5 @@
 from sys import stdin
-from typing import List
+from safe_typing import List
 from re import sub
 
 from butter_bot import Cell, ButterBotStateSpace
@@ -59,15 +59,16 @@ ids = IDSearch()
 # print(ids(state_space))
 
 from ucs import UCSearch
+
 ucs = UCSearch()
-#print(ucs(state_space))
+# print(ucs(state_space))
 
 from a_star import AStar
+
 astar = AStar()
 # print(astar(state_space))
 
 from best_first_search import BestFirstSearch
+
 best_first_search = BestFirstSearch()
 print(best_first_search(state_space))
-
-

@@ -1,6 +1,7 @@
 from enum import Enum
-from typing import Dict, List, NamedTuple, Self, Tuple
+from safe_typing import Dict, List, NamedTuple, Tuple, Self
 from state_space import StateSpace
+from functools import partial
 
 Cell = Tuple[int, int]
 
@@ -77,4 +78,29 @@ class ButterBotStateSpace(StateSpace):
         return all(
             target_cell in self.state.butter_cells
             for target_cell in self.state.target_cells
+        )
+
+    def heuristic(self) -> int:
+        def distance(cell_A, cell_B):
+            return abs(cell_A[0] - cell_B[0]) + abs(cell_A[1] - cell_B[1])
+
+        bot_cell = self.state.bot_cell
+        butter_cells = [
+            cell
+            for cell in self.state.butter_cells
+            if cell not in self.state.target_cells
+        ]
+        target_cells = [
+            cell
+            for cell in self.state.target_cells
+            if cell not in self.state.butter_cells
+        ]
+        if not target_cells:
+            return 0
+        if not butter_cells:
+            return float("inf")
+        nearest_butter = min(butter_cells, key=partial(distance, bot_cell))
+        nearest_target = min(target_cells, key=partial(distance, nearest_butter))
+        return distance(bot_cell, nearest_butter) + distance(
+            nearest_butter, nearest_target
         )
