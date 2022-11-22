@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List
+from safe_typing import List
 
 from state_space import StateSpace
 

@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List, Type, Self
+from safe_typing import Self, List, Type
 from enum import Enum
 
 

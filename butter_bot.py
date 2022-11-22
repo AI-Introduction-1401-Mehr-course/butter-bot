@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Dict, List, NamedTuple, Self, Tuple
+from safe_typing import Dict, List, NamedTuple, Tuple, Self
 from state_space import StateSpace
 
 Cell = Tuple[int, int]

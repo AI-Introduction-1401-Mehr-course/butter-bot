@@ -1,4 +1,4 @@
-from typing import List, NamedTuple, Tuple
+from safe_typing import List, NamedTuple, Tuple
 from search import Search
 from state_space import StateSpace
 

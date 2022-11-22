@@ -1,4 +1,4 @@
-from typing import List
+from safe_typing import List
 from search import Search
 from state_space import StateSpace
 
