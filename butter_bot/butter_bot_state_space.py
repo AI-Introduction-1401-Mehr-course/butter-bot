@@ -1,6 +1,7 @@
 from enum import Enum
-from safe_typing import Dict, List, NamedTuple, Cell, Self
+
 from abstracts import StateSpace
+from safe_typing import Cell, Dict, List, NamedTuple, Self
 
 
 class ButterBotStateSpace(StateSpace):

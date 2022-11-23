@@ -1,15 +1,13 @@
-from sys import stdin
-from safe_typing import List, Cell
 from re import sub
-from butter_bot import ButterBotStateSpace, bot_to_nearest_butter_to_nearest_target_distance_heuristic as btnbtnt_distance_heuristic
-from search import (
-    BFSearch,
-    DFSearch,
-    IDSearch,
-    UCSearch,
-    AStar,
-    BestFirstSearch,
-)
+from sys import stdin
+
+from butter_bot import ButterBotStateSpace
+from butter_bot import \
+    bot_to_nearest_butter_to_nearest_target_distance_heuristic as \
+    btnbtnt_distance_heuristic
+from safe_typing import Cell, List
+from search import (AStar, BestFirstSearch, BFSearch, DFSearch, IDSearch,
+                    UCSearch)
 
 columns, rows = (int(i) for i in next(stdin).split())
 

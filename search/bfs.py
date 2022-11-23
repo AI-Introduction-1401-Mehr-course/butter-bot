@@ -1,5 +1,5 @@
-from safe_typing import List, NamedTuple, Tuple
 from abstracts import Search, StateSpace
+from safe_typing import List, NamedTuple, Tuple
 
 
 class BFSearch(Search):

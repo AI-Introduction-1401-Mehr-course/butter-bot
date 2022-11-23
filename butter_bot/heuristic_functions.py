@@ -1,4 +1,5 @@
 from functools import partial
+
 from .butter_bot_state_space import ButterBotStateSpace
 
 

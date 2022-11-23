@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
-from safe_typing import Self, List, Type
 from enum import Enum
+
+from safe_typing import List, Self, Type
 
 
 class StateSpace(ABC):

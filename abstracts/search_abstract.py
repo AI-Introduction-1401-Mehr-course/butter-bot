@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-from safe_typing import List, Callable
+
+from safe_typing import Callable, List
 
 from .state_space_abstract import StateSpace
 

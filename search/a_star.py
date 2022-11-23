@@ -1,6 +1,7 @@
-from safe_typing import List, NamedTuple, Tuple
-from abstracts import InformedSearch, StateSpace
 from bisect import insort
+
+from abstracts import InformedSearch, StateSpace
+from safe_typing import List, NamedTuple, Tuple
 
 
 class AStar(InformedSearch):
