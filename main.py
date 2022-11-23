@@ -1,8 +1,15 @@
 from sys import stdin
 from safe_typing import List
 from re import sub
-
 from butter_bot import Cell, ButterBotStateSpace
+from search import (
+    BFSearch,
+    DFSearch,
+    IDSearch,
+    UCSearch,
+    AStar,
+    BestFirstSearch,
+)
 
 columns, rows = (int(i) for i in next(stdin).split())
 
@@ -43,32 +50,26 @@ state_space = ButterBotStateSpace(
     }
 )
 
-from bfs import BFSearch
 
 bfs = BFSearch()
 # print(bfs(state_space))
 
-from dfs import DFSearch
 
 dfs = DFSearch()
 # print(dfs(state_space))
 
-from ids import IDSearch
 
 ids = IDSearch()
 # print(ids(state_space))
 
-from ucs import UCSearch
 
 ucs = UCSearch()
 # print(ucs(state_space))
 
-from a_star import AStar
 
 astar = AStar()
 # print(astar(state_space))
 
-from best_first_search import BestFirstSearch
 
 best_first_search = BestFirstSearch()
 print(best_first_search(state_space))

@@ -1,10 +1,9 @@
 from safe_typing import List, NamedTuple, Tuple
-from search import Search
-from state_space import StateSpace
+from abstracts import Search, StateSpace
 from bisect import insort
 
 
-class AStar(Search):
+class UCSearch(Search):
     def __call__(self, state_space: StateSpace) -> List[StateSpace.Action] | None:
         class Node(NamedTuple):
             state_space: StateSpace
@@ -25,5 +24,5 @@ class AStar(Search):
                         [*current_node.path, action],
                         cost=current_node.cost + current_node.state_space.cost(action),
                     ),
-                    key=lambda x: x.cost + x.state_space.heuristic(),
+                    key=lambda x: x.cost,
                 )

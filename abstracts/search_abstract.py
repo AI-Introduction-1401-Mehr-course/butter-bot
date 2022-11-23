@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from safe_typing import List
 
-from state_space import StateSpace
+from .state_space_abstract import StateSpace
 
 
 class Search(ABC):

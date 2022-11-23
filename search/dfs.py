@@ -1,6 +1,5 @@
 from safe_typing import List
-from search import Search
-from state_space import StateSpace
+from abstracts import Search, StateSpace
 
 
 class DFSearch(Search):

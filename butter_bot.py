@@ -1,6 +1,6 @@
 from enum import Enum
 from safe_typing import Dict, List, NamedTuple, Tuple, Self
-from state_space import StateSpace
+from abstracts import StateSpace
 from functools import partial
 
 Cell = Tuple[int, int]
