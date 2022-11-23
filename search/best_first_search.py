@@ -1,16 +1,15 @@
 from safe_typing import List, NamedTuple, Tuple
-from abstracts import Search, StateSpace
+from abstracts import InformedSearch, StateSpace
 from bisect import insort
 
 
-class BestFirstSearch(Search):
+class BestFirstSearch(InformedSearch):
     def __call__(self, state_space: StateSpace) -> List[StateSpace.Action] | None:
         class Node(NamedTuple):
             state_space: StateSpace
             path: List[StateSpace.Action]
-            cost: int
 
-        list = [Node(state_space=state_space, path=[], cost=0)]
+        list = [Node(state_space=state_space, path=[])]
 
         while list:
             current_node = list.pop(0)
@@ -22,7 +21,6 @@ class BestFirstSearch(Search):
                     Node(
                         current_node.state_space.result(action),
                         [*current_node.path, action],
-                        cost=current_node.cost + current_node.state_space.cost(action),
                     ),
-                    key=lambda x: x.state_space.heuristic(),
+                    key=lambda x: self.heuristic(x.state_space),
                 )

@@ -1,7 +1,7 @@
 from sys import stdin
-from safe_typing import List
+from safe_typing import List, Cell
 from re import sub
-from butter_bot import Cell, ButterBotStateSpace
+from butter_bot import ButterBotStateSpace, bot_to_nearest_butter_to_nearest_target_distance_heuristic as btnbtnt_distance_heuristic
 from search import (
     BFSearch,
     DFSearch,
@@ -67,9 +67,9 @@ ucs = UCSearch()
 # print(ucs(state_space))
 
 
-astar = AStar()
+astar = AStar(btnbtnt_distance_heuristic)
 # print(astar(state_space))
 
 
-best_first_search = BestFirstSearch()
+best_first_search = BestFirstSearch(btnbtnt_distance_heuristic)
 print(best_first_search(state_space))
