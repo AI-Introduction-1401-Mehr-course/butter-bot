@@ -5,6 +5,11 @@ from safe_typing import Cell, Dict, List, NamedTuple, Self
 
 
 class ButterBotStateSpace(StateSpace):
+    """
+    Represents the state space of butter bot problem defentition, not just an state space isntance.
+    Created objects have their state as a property.
+    """
+
     class ButterBotState(NamedTuple):
         columns: int
         rows: int
@@ -45,6 +50,10 @@ class ButterBotStateSpace(StateSpace):
         return True
 
     def result(self, action: Action) -> Self:
+        """
+        Returns resulting state of the `action` on `self` state.
+        """
+
         new_bot_cell = tuple(i + j for i, j in zip(self.state.bot_cell, action.value))
         new_butter_cells = self.state.butter_cells
 
@@ -66,13 +75,25 @@ class ButterBotStateSpace(StateSpace):
         )
 
     def action(self) -> List[Action]:
+        """
+        Returns all valid actions for `self` state.
+        """
+
         return list(action for action in self.Action if self.result(action)._is_valid())
 
     def cost(self, action: Action) -> int:
+        """
+        Returns cost of the `action` for `self` state.
+        """
+
         new_bot_cell = tuple(i + j for i, j in zip(self.state.bot_cell, action.value))
         return self.state.cost_table[new_bot_cell[0]][new_bot_cell[1]]
 
     def is_goal(self) -> bool:
+        """
+        Returns if `self` state is a member of goal set.
+        """
+
         return all(
             target_cell in self.state.butter_cells
             for target_cell in self.state.target_cells

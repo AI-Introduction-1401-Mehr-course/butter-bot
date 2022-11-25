@@ -3,6 +3,11 @@ from safe_typing import List
 
 
 class DFSearch(Search):
+    """
+    Depth-first search implementation.
+    Expands leftmost node(first of most deep nodes) from fringe.
+    """
+
     def __call__(self, state_space: StateSpace) -> List[StateSpace.Action] | None:
         if state_space.is_goal():
             return []

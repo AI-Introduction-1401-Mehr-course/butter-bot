@@ -3,6 +3,11 @@ from safe_typing import List
 
 
 class IDSearch(Search):
+    """
+    Iterative deepening depth-first search implementation.
+    Expands leftmost node(first of most deep nodes) from fringe, if its higher than a linear-increasing depth limit.
+    """
+
     def __call__(self, state_space: StateSpace) -> List[StateSpace.Action] | None:
         depth = 0
         while self._limited_dfs(state_space, depth) is None:
