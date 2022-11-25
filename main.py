@@ -1,52 +1,12 @@
-from re import sub
 from sys import stdin
 
-from butter_bot import ButterBotStateSpace
-from butter_bot import \
-    bot_to_nearest_butter_to_nearest_target_distance_heuristic as \
-    btnbtnt_distance_heuristic
-from safe_typing import Cell, List
-from search import (AStar, BestFirstSearch, BFSearch, DFSearch, IDSearch,
-                    UCSearch)
-
-columns, rows = (int(i) for i in next(stdin).split())
-
-cells = [next(stdin).split() for _ in range(columns)]
-
-cost_table: List[List[int]] = [
-    [int(sub(r"\D", "", cells[i][j])) if cells[i][j] != "x" else 0 for j in range(rows)]
-    for i in range(columns)
-]
-
-butter_cells: List[Cell] = []
-target_cells: List[Cell] = []
-blocked_cells: List[Cell] = []
-bot_cell: Cell = (0, 0)
-
-for i in range(columns):
-    for j in range(rows):
-        for symbol, cell_list in {
-            "b": butter_cells,
-            "p": target_cells,
-            "x": blocked_cells,
-        }.items():
-            if cells[i][j].count(symbol):
-                cell_list.append((i, j))
-        if cells[i][j].count("r"):
-            bot_cell = (i, j)
-
-
-state_space = ButterBotStateSpace(
-    {
-        "columns": columns,
-        "rows": rows,
-        "cost_table": cost_table,
-        "bot_cell": bot_cell,
-        "butter_cells": butter_cells,
-        "target_cells": target_cells,
-        "blocked_cells": blocked_cells,
-    }
+from butter_bot import (
+    bot_to_nearest_butter_to_nearest_target_distance_heuristic as btnbtnt_distance_heuristic,
 )
+from butter_bot import print_path, state_space_from_io
+from search import AStar, BestFirstSearch, BFSearch, DFSearch, IDSearch, UCSearch
+
+state_space = state_space_from_io(stdin)
 
 
 bfs = BFSearch()
@@ -70,4 +30,4 @@ astar = AStar(btnbtnt_distance_heuristic)
 
 
 best_first_search = BestFirstSearch(btnbtnt_distance_heuristic)
-print(best_first_search(state_space))
+print_path(state_space, best_first_search(state_space))

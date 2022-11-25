@@ -1,5 +1,3 @@
-from enum import Enum
-
 from abstracts import StateSpace
 from safe_typing import Cell, Dict, List, NamedTuple, Self
 
@@ -24,7 +22,7 @@ class ButterBotStateSpace(StateSpace):
     def __init__(self, state_dict: Dict):
         self.state = self.ButterBotState(**state_dict)
 
-    class Action(Enum):
+    class Action(StateSpace.Action):
         value: Cell
 
         GO_UP = (-1, 0)

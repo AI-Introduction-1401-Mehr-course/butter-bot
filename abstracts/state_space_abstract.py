@@ -1,12 +1,12 @@
 from abc import ABC, abstractmethod
 from enum import Enum
 
-from safe_typing import List, Self, Type
+from safe_typing import List, Self
 
 
 class StateSpace(ABC):
 
-    Action = Type[Enum]
+    Action = Enum
 
     @abstractmethod
     def result(self, action: Action) -> Self:
