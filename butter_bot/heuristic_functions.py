@@ -4,13 +4,19 @@ from .butter_bot_state_space import ButterBotStateSpace
 
 
 def distance(cell_A, cell_B) -> int:
+    """
+    Returns distance between two cells.
+    """
     return abs(cell_A[0] - cell_B[0]) + abs(cell_A[1] - cell_B[1])
 
 
 def bot_to_nearest_butter_that_is_nearest_to_target_to_nearest_target_heuristic(
     state_space: ButterBotStateSpace,
 ) -> float:
-
+    """
+    Returns distance from current state to goal
+    by calculating distance from bot to nearest butter that is nearest to a target plus distance from that butter to nearest target.
+    """
     state = state_space.state
 
     bot_cell = state.bot_cell
@@ -48,7 +54,10 @@ def bot_to_nearest_butter_that_is_nearest_to_target_to_nearest_target_heuristic(
 def bot_to_nearest_butter_to_nearest_target_distance_heuristic(
     state_space: ButterBotStateSpace,
 ) -> float:
-
+    """
+    Returns distance from current state to goal
+    by calculating distance from bot to nearest butter plus distance from that butter to nearest point.
+    """
     state = state_space.state
 
     bot_cell = state.bot_cell
@@ -69,7 +78,10 @@ def bot_to_nearest_butter_to_nearest_target_distance_heuristic(
 def number_of_butters_not_on_a_target(
     state_space: ButterBotStateSpace,
 ) -> float:
-
+    """
+    Returns distance from current state to goal
+    by calculating number of remaining butters that have not reached a target.
+    """
     state = state_space.state
     butter_cells = [
         cell for cell in state.butter_cells if cell not in state.target_cells

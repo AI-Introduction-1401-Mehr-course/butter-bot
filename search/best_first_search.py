@@ -5,6 +5,10 @@ from safe_typing import List, NamedTuple, Tuple
 
 
 class BestFirstSearch(InformedSearch):
+    """
+    Best-first search (Greedy) implementation.
+    Expands nodes which are closest to the goal node and the closest cost is estimated by heuristic function.
+    """
     def __call__(self, state_space: StateSpace) -> List[StateSpace.Action] | None:
         class Node(NamedTuple):
             state_space: StateSpace

@@ -5,6 +5,10 @@ from safe_typing import List, NamedTuple, Tuple
 
 
 class AStar(InformedSearch):
+    """
+    A* search implementation.
+    Expands nodes according to the minimum distance to goal and cumulative cost.
+    """
     def __call__(self, state_space: StateSpace) -> List[StateSpace.Action] | None:
         class Node(NamedTuple):
             state_space: StateSpace
