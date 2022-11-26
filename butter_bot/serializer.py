@@ -15,7 +15,7 @@ def state_space_from_io(io: IO):
 
     cost_table: List[List[int]] = [
         [
-            int(sub(r"\D", "", cells[i][j])) if cells[i][j] != "x" else 0
+            int(sub(r"\D", "", cells[i][j])) if cells[i][j] != "x" else -1
             for j in range(rows)
         ]
         for i in range(columns)
