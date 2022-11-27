@@ -1,4 +1,6 @@
 from functools import partial
+from itertools import filterfalse
+from math import inf
 
 from .butter_bot_state_space import ButterBotStateSpace
 from safe_typing import Cell, List
@@ -70,7 +72,7 @@ def bot_to_nearest_butter_that_is_nearest_to_target_to_nearest_target_heuristic(
     if not target_cells:
         return 0
     if not butter_cells:
-        return float("inf")
+        return inf
 
     nearest_butter = butter_cells[0]
     for butter_cell in butter_cells:
@@ -111,7 +113,7 @@ def bot_to_nearest_butter_to_nearest_target_distance_heuristic(
     if not target_cells:
         return 0
     if not butter_cells:
-        return float("inf")
+        return inf
     nearest_butter = min(butter_cells, key=partial(distance, bot_cell))
     nearest_target = min(target_cells, key=partial(distance, nearest_butter))
     return distance(bot_cell, nearest_butter) + distance(nearest_butter, nearest_target)
@@ -149,14 +151,18 @@ def sum_of_min_cost_of_filling_target_cells_with_butter(
     """
 
     state = state_space.state
-    return sum(
-        min(
-            cost_matrix[butter_cell[0]][butter_cell[1]]
-            for butter_cell in state.butter_cells
+    try:
+        return sum(
+            min(
+                cost_matrix[butter_cell[0]][butter_cell[1]]
+                for butter_cell in state.butter_cells
+                if cost_matrix[butter_cell[0]][butter_cell[1]] != -1
+            )
+            for cost_matrix in (
+                min_cost_from_cell_matrix(cell, state.cost_table)
+                for cell in state.target_cells
+                if cell not in state.butter_cells
+            )
         )
-        for cost_matrix in (
-            min_cost_from_cell_matrix(cell, state.cost_table)
-            for cell in state.target_cells
-            if cell not in state.butter_cells
-        )
-    )
+    except ValueError:
+        return inf
