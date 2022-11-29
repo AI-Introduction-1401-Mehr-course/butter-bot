@@ -1,5 +1,5 @@
 from functools import partial
-from itertools import filterfalse
+from itertools import filterfalse, permutations
 from math import inf
 
 from .butter_bot_state_space import ButterBotStateSpace
@@ -139,6 +139,23 @@ def number_of_targets_with_no_butter(state_space: ButterBotStateSpace) -> float:
     return sum(1 for cell in state.target_cells if cell not in state.butter_cells)
 
 
+def min_cost_of_reaching_any_butter(state_space: ButterBotStateSpace) -> float:
+
+    state = state_space.state
+
+    min_cost_from_bot_matrix = min_cost_from_cell_matrix(
+        state.bot_cell, state.cost_table
+    )
+    try:
+        return min(
+            min_cost_from_bot_matrix[i[0]][i[1]] - state.cost_table[i[0]][i[1]]
+            for i in state.butter_cells
+            if i not in state.target_cells
+        )
+    except ValueError:
+        return 0
+
+
 # Heuristics derived from relaxed versions of the problem:
 
 
@@ -163,6 +180,36 @@ def sum_of_min_cost_of_filling_target_cells_with_butter(
                 for cell in state.target_cells
                 if cell not in state.butter_cells
             )
+        )
+    except ValueError:
+        return inf
+
+
+def min_of_total_cost_of_filling_target_cells_with_butter(
+    state_space: ButterBotStateSpace,
+) -> float:
+    """
+    Teleporting bot with ability of picking up butters.
+    Also duplicating butters and walking through them and stuff...
+    """
+
+    state = state_space.state
+
+    b_cells = [cell for cell in state.butter_cells if cell not in state.target_cells]
+    t_cells = [cell for cell in state.target_cells if cell not in state.butter_cells]
+    costs = [
+        [cost_matrix[butter_cell[0]][butter_cell[1]] for butter_cell in b_cells]
+        for cost_matrix in (
+            min_cost_from_cell_matrix(target_cell, state.cost_table)
+            for target_cell in t_cells
+        )
+    ]
+
+    try:
+        return min(
+            sum(costs[i][j[i]] for i in range(len(t_cells)))
+            for j in permutations(range(len(b_cells)), len(t_cells))
+            if all(costs[i][j[i]] != -1 for i in range(len(t_cells)))
         )
     except ValueError:
         return inf
