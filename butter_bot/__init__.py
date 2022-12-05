@@ -6,3 +6,10 @@ from .heuristic_functions import (
     cost_of_raching_any_butter_and_then_min_cost_for_filling_all_target_cells_with_a_butter as delta,
 )
 from .serializer import *
+
+heuristic_functions_dict = {
+    "alpha": alpha,
+    "beta": beta,
+    "gamma": gamma,
+    "delta": delta,
+}
