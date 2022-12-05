@@ -2,13 +2,10 @@ from butter_bot import (
     ButterBotStateSpace,
     state_space_from_io,
     print_path,
-    number_of_butters_not_on_a_target,
-    number_of_targets_with_no_butter,
-    sum_of_min_cost_of_filling_target_cells_with_butter,
-    min_of_total_cost_of_filling_target_cells_with_butter,
-    bot_to_nearest_butter_to_nearest_target_distance_heuristic,
-    bot_to_nearest_butter_that_is_nearest_to_target_to_nearest_target_heuristic,
-    min_cost_of_reaching_any_butter,
+    alpha,
+    beta,
+    gamma,
+    delta,
 )
 from safe_typing import Callable
 from search import BestFirstSearch
@@ -37,17 +34,7 @@ state_space = state_space_from_io(
     open(input())
 )  # TODO: Replace with a procedural problem generator
 
-for h in (
-    number_of_targets_with_no_butter,
-    number_of_butters_not_on_a_target,
-    sum_of_min_cost_of_filling_target_cells_with_butter,
-    min_of_total_cost_of_filling_target_cells_with_butter,
-    bot_to_nearest_butter_to_nearest_target_distance_heuristic,
-    bot_to_nearest_butter_that_is_nearest_to_target_to_nearest_target_heuristic,
-    min_cost_of_reaching_any_butter,
-    lambda x: min_cost_of_reaching_any_butter(x)
-    + min_of_total_cost_of_filling_target_cells_with_butter(x),
-):
+for h in (alpha, beta, gamma, delta):
     ButterBotStateSpace.is_goal.explored_node_counter = 0
     ButterBotStateSpace.is_goal.start_time = datetime.now()
     try:
