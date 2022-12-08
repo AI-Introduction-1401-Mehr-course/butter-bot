@@ -21,7 +21,9 @@ parser.add_argument(
     "--search-algorithm",
     default="best_first_search",
     type=lambda x: search_algorithms_dict[x],
-    help="algorithm for executing search",
+    help="algorithm for executing search\noptions:\n( "
+    + " | ".join(key for key in search_algorithms_dict.keys())
+    + " )",
 )
 
 parser.add_argument(
@@ -29,7 +31,9 @@ parser.add_argument(
     "--heuristic-function",
     default="alpha",
     type=lambda x: heuristic_functions_dict[x],
-    help="heuristic for informed searchs",
+    help="heuristic for informed searchs\noptions:\n( "
+    + " | ".join(key for key in heuristic_functions_dict.keys())
+    + " )",
 )
 
 parser.add_argument(
