@@ -70,6 +70,23 @@
 
 پیچیدگی زمانی: O(len(target_cells))
 
+## راهنمای ابزار خط فرمان:
+
+```text
+usage: run.py [-h] [-i INPUT_FILE] [-s SEARCH_ALGORITHM] [-e HEURISTIC_FUNCTION] [-t TIMEOUT]
+
+options:
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file INPUT_FILE
+                        read from file instead of stdin
+  -s SEARCH_ALGORITHM, --search-algorithm SEARCH_ALGORITHM
+                        algorithm for executing search
+  -e HEURISTIC_FUNCTION, --heuristic-function HEURISTIC_FUNCTION
+                        heuristic for informed searchs
+  -t TIMEOUT, --timeout TIMEOUT
+                        time limit of search execution
+```
+
 ## تاریخچه کامیت ها:
 
 ```text
