@@ -53,6 +53,31 @@ def min_cost_from_cell_matrix(
     return ans
 
 
+def bot_to_nearest_butter_to_nearest_target_distance_heuristic(
+    state_space: ButterBotStateSpace,
+) -> float:
+    """
+    Returns distance from current state to goal
+    by calculating distance from bot to nearest butter plus distance from that butter to nearest point.
+    """
+    state = state_space.state
+
+    bot_cell = state.bot_cell
+    butter_cells = [
+        cell for cell in state.butter_cells if cell not in state.target_cells
+    ]
+    target_cells = [
+        cell for cell in state.target_cells if cell not in state.butter_cells
+    ]
+    if not target_cells:
+        return 0
+    if not butter_cells:
+        return inf
+    nearest_butter = min(butter_cells, key=partial(distance, bot_cell))
+    nearest_target = min(target_cells, key=partial(distance, nearest_butter))
+    return distance(bot_cell, nearest_butter) + distance(nearest_butter, nearest_target)
+
+
 def bot_to_nearest_butter_that_is_nearest_to_target_to_nearest_target_heuristic(
     state_space: ButterBotStateSpace,
 ) -> float:
@@ -94,12 +119,12 @@ def bot_to_nearest_butter_that_is_nearest_to_target_to_nearest_target_heuristic(
     return distance(bot_cell, nearest_butter) + distance(nearest_butter, nearest_target)
 
 
-def bot_to_nearest_butter_to_nearest_target_distance_heuristic(
+def bot_to_nearest_butter_plus_butters_to_nearest_target_distance_heuristic(
     state_space: ButterBotStateSpace,
 ) -> float:
     """
     Returns distance from current state to goal
-    by calculating distance from bot to nearest butter plus distance from that butter to nearest point.
+    by calculating distance from bot to nearest butter plus distance from all butters to their nearest target.
     """
     state = state_space.state
 
@@ -114,9 +139,29 @@ def bot_to_nearest_butter_to_nearest_target_distance_heuristic(
         return 0
     if not butter_cells:
         return inf
-    nearest_butter = min(butter_cells, key=partial(distance, bot_cell))
-    nearest_target = min(target_cells, key=partial(distance, nearest_butter))
-    return distance(bot_cell, nearest_butter) + distance(nearest_butter, nearest_target)
+
+    nearest_butter = butter_cells[0]
+    for butter_cell in butter_cells:
+        if distance(butter_cell, bot_cell) < distance(nearest_butter, bot_cell):
+            nearest_butter = butter_cell
+        elif distance(butter_cell, bot_cell) == distance(nearest_butter, bot_cell):
+            nearest_target_to_butter_cell = min(
+                target_cells, key=partial(distance, butter_cell)
+            )
+            nearest_target_to_nearest_butter = min(
+                target_cells, key=partial(distance, nearest_butter)
+            )
+            if distance(butter_cell, nearest_target_to_butter_cell) < distance(
+                nearest_butter, nearest_target_to_nearest_butter
+            ):
+                nearest_butter = butter_cell
+
+    butter_to_nearest_target_sum = 0
+    for butter_cell in butter_cells:
+        nearest_target = min(target_cells, key=partial(distance, butter_cell))
+        butter_to_nearest_target_sum += distance(butter_cell, nearest_target)
+
+    return distance(bot_cell, nearest_butter) + butter_to_nearest_target_sum
 
 
 def number_of_butters_not_on_a_target(
