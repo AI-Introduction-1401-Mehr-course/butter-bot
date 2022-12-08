@@ -1,3 +1,5 @@
+<div style="direction: rtl;">
+
 # ربات کره
 
 ## فضای حالت ربات کره
@@ -72,6 +74,9 @@
 
 ## راهنمای ابزار خط فرمان:
 
+</div>
+<div >
+
 ```text
 usage: run.py [-h] [-i INPUT_FILE] [-s SEARCH_ALGORITHM] [-e HEURISTIC_FUNCTION] [-t TIMEOUT]
 
@@ -87,7 +92,13 @@ options:
                         time limit of search execution
 ```
 
+</div>
+<div style="direction: rtl;">
+
 ## تاریخچه کامیت ها:
+
+</div>
+<div >
 
 ```text
     {replace this line with output of: `git log --pretty="%h %aN '%s'"`}
