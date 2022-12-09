@@ -263,6 +263,10 @@ def min_of_total_cost_of_filling_target_cells_with_butter(
 def cost_of_raching_any_butter_and_then_min_cost_for_filling_all_target_cells_with_a_butter(
     state_space: ButterBotStateSpace,
 ) -> float:
+    """
+    Returns sum of min_of_total_cost_of_filling_target_cells_with_butter and min_cost_of_reaching_any_butter heuristics.
+    """
+
     return min_cost_of_reaching_any_butter(
         state_space
     ) + min_of_total_cost_of_filling_target_cells_with_butter(state_space)
