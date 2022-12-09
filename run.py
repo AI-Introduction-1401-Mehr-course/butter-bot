@@ -39,7 +39,7 @@ parser.add_argument(
 parser.add_argument(
     "-t",
     "--timeout",
-    default=1,
+    default=3,
     type=int,
     help="time limit of search execution",
 )
