@@ -15,6 +15,7 @@ class BFSearch(Search):
 
         queue = [Node(state_space=state_space, path=[])]
         visited = []
+
         while queue:
             current_node = queue.pop(0)
             if current_node.state_space.is_goal():

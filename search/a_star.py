@@ -9,6 +9,7 @@ class AStar(InformedSearch):
     A* search implementation.
     Expands nodes according to the minimum distance to goal and cumulative cost.
     """
+
     def __call__(self, state_space: StateSpace) -> List[StateSpace.Action] | None:
         class Node(NamedTuple):
             state_space: StateSpace
@@ -17,6 +18,7 @@ class AStar(InformedSearch):
 
         list = [Node(state_space=state_space, path=[], cost=0)]
         visited = []
+
         while list:
             current_node = list.pop(0)
             if current_node.state_space.is_goal():
