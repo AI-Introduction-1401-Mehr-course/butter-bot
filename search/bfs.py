@@ -14,11 +14,14 @@ class BFSearch(Search):
             path: List[StateSpace.Action]
 
         queue = [Node(state_space=state_space, path=[])]
-
+        visited = []
         while queue:
             current_node = queue.pop(0)
             if current_node.state_space.is_goal():
                 return current_node.path
+            if current_node.state_space.state in visited:
+                continue
+            visited.append(current_node.state_space.state)
             for action in current_node.state_space.action():
                 queue.append(
                     Node(
