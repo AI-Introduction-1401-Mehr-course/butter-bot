@@ -29,7 +29,7 @@ parser.add_argument(
 parser.add_argument(
     "-e",
     "--heuristic-function",
-    default="alpha",
+    default="beta",
     type=lambda x: heuristic_functions_dict[x],
     help="heuristic for informed searchs\noptions:\n( "
     + " | ".join(key for key in heuristic_functions_dict.keys())
