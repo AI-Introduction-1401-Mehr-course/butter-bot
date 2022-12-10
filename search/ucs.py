@@ -21,10 +21,10 @@ class UCSearch(Search):
 
         while list:
             current_node = list.pop(0)
-            if current_node.state_space.is_goal():
-                return current_node.path
             if current_node.state_space.state in visited:
                 continue
+            if current_node.state_space.is_goal():
+                return current_node.path
             visited.append(current_node.state_space.state)
             for action in current_node.state_space.action():
                 insort(
