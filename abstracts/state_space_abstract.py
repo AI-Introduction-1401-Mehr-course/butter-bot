@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from enum import Enum
+from typing import NamedTuple
 
 from safe_typing import List, Self
 
@@ -7,6 +8,8 @@ from safe_typing import List, Self
 class StateSpace(ABC):
 
     Action = Enum
+
+    state = NamedTuple  # TODO: force state to be hashable.
 
     @abstractmethod
     def result(self, action: Action) -> Self:
